@@ -1,6 +1,6 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { TRACKS } from "./content";
+import { isUpcoming, TRACKS } from "./content";
 import { lenis } from "./scroll";
 import { reduced } from "./motion";
 
@@ -32,6 +32,10 @@ export function initGallery() {
   const track = document.getElementById("gTrack")!;
   const tiles = [...track.querySelectorAll<HTMLElement>(".tile")];
   const num = document.getElementById("gNum")!;
+  // The tag on the current tile says "Coming soon" until the release date has passed, then "On deck".
+  const tagText = () => tiles.forEach((t, i) => { t.querySelector(".tile__tag")!.textContent = isUpcoming(TRACKS[i]) ? "Coming soon" : "On deck"; });
+  tagText();
+  document.addEventListener("drop:live", tagText);
   const fill = document.getElementById("gFill")!;
   const isReduced = reduced();
 

@@ -36,6 +36,7 @@ export function initCountdown() {
       body.textContent = DROP.after;
       card.classList.add("is-live");
       clearInterval(timer);
+      document.dispatchEvent(new CustomEvent("drop:live")); // tags flip from "Coming soon" to live
       return;
     }
     const { html, long } = render(left);

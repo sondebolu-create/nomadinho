@@ -1,5 +1,5 @@
 import gsap from "gsap";
-import { thumb, TRACKS } from "../content";
+import { isUpcoming, thumb, TRACKS } from "../content";
 import { player } from "./player";
 import { reduced } from "../motion";
 
@@ -43,6 +43,7 @@ export function initDeck() {
     const i = player.index, t = player.track;
     $("deckLabel").textContent = `Now on the deck · ${String(i + 1).padStart(2, "0")}/${String(TRACKS.length).padStart(2, "0")}`;
     $("deckTitle").textContent = t.title;
+    $("deckSoon").hidden = !isUpcoming(t);
     $("deckArtist").textContent = `${t.artist} · ${t.type}`;
     ($("ttLabel") as HTMLImageElement).src = thumb(t.cover);
     document.querySelectorAll<HTMLElement>(".cover").forEach((c, n) => c.classList.toggle("is-on", n === i));
@@ -54,6 +55,7 @@ export function initDeck() {
     playedBars = -1; shownSec = -1; shownDur = -1;
     document.body.style.setProperty("--bpm", String(t.bpm));
   };
+  document.addEventListener("drop:live", () => { $("deckSoon").hidden = !isUpcoming(player.track); });
   let lastIndex = -1;
   document.addEventListener("deck:state", ((e: CustomEvent) => {
     if (e.detail.index !== lastIndex) { lastIndex = e.detail.index; renderTrack(); }

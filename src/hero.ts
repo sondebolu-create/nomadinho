@@ -52,7 +52,7 @@ export function initHero() {
       </div>
       <div class="deck__info">
         <p class="deck__label ui-label" id="deckLabel"></p>
-        <h2 class="deck__title" id="deckTitle" aria-live="polite"></h2>
+        <div class="deck__titlerow"><h2 class="deck__title" id="deckTitle" aria-live="polite"></h2><span class="tag" id="deckSoon" hidden>Coming soon</span></div>
         <p class="deck__artist" id="deckArtist"></p>
       </div>
       <div class="deck__controls">

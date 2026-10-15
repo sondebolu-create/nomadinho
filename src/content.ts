@@ -38,6 +38,9 @@ const PLACEHOLDER_TRACKS: Track[] = [
 export const TRACKS: Track[] = [...PLACEHOLDER_TRACKS];
 export const setTracks = (list: Track[]) => { if (list.length) TRACKS.splice(0, TRACKS.length, ...list); };
 
+/** True until midnight (Lagos) on the release date: drives the "Coming soon" tags and matches the countdown. */
+export const isUpcoming = (t: Track) => !!t.date && Date.parse(`${t.date}T00:00:00+01:00`) > Date.now();
+
 export type Stat = { source: string; prefix: string; number: number; suffix: string; sentence: string };
 // Display order after the countdown card: left column [countdown, STATS[0]], right column [STATS[1], STATS[2]].
 export const STATS: Stat[] = [

@@ -8,6 +8,8 @@ uniform vec2 uSpot;
 varying vec2 vUv;
 varying float vLit;
 varying float vLum;
+varying float vDark;
+varying float vMask;
 
 float luma(vec3 c) { return dot(c, vec3(0.299, 0.587, 0.114)); }
 
@@ -26,9 +28,11 @@ void main() {
   vec3 p = position;
   p.z += depth * uDepth * uReveal;
   vLum = l;
-  vLit = smoothstep(0.34, 0.0, distance(uv, uSpot));
+  vDark = 1.0 - smoothstep(0.08, 0.85, l); // shadows → big ink dots on the light page (halftone)
+  vMask = m;
+  vLit = smoothstep(0.3, 0.0, distance(uv, uSpot));
 #ifdef IS_POINTS
-  gl_PointSize = uPointSize * (0.5 + l * 0.8 + vLit * 0.9);
+  gl_PointSize = uPointSize * (0.28 + 1.0 * vDark * (0.35 + 0.65 * m) + 0.18 * vLit);
 #endif
   gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
 }

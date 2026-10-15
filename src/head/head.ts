@@ -74,7 +74,8 @@ export async function createHead(host: HTMLElement) {
     camera.aspect = w / h;
     camera.position.z = 4.35 * Math.max(1, 1 / camera.aspect); // keep the whole plane in frame on portrait canvases
     camera.updateProjectionMatrix();
-    pointMat.uniforms.uPointSize.value = (h / 640) * 2.6 * renderer.getPixelRatio();
+    // one dot per grid cell: the plane spans ~87.5% of the canvas height
+    pointMat.uniforms.uPointSize.value = (h * 0.875 / (N - 1)) * renderer.getPixelRatio() * 1.15;
   };
   new ResizeObserver(resize).observe(host);
   resize();
