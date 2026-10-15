@@ -1,0 +1,28 @@
+:root {
+  --bg: #0a0a09;
+  --bg-2: #121210;
+  --ink: #ece6da;
+  --ink-2: #a39d91;
+  --ink-3: #5d5951;
+  --line: rgba(236, 230, 218, 0.14);
+  --accent: #ff4d1a;
+  color-scheme: dark; /* native controls (volume slider) follow the theme */
+
+  --gutter: clamp(16px, 2.2vw, 32px);
+  --ease-ui: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  --font-ui: "Space Mono", ui-monospace, monospace;
+  --font-body: "Inter Tight", system-ui, sans-serif;
+  --font-wordmark: "CL Antique No15", serif;
+}
+
+/* Lights-out (SHIFT) swaps colour tokens only. */
+:root[data-theme="lights-out"] {
+  --bg: #ece6da;
+  --bg-2: #dcd5c7;
+  --ink: #0a0a09;
+  --ink-2: #4a463f;
+  --ink-3: #7d776c;
+  --line: rgba(10, 10, 9, 0.16);
+  color-scheme: light;
+}

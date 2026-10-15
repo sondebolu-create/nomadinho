@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.vite/
+*.log
+
+# local tooling
+.claude/
+
+# original source assets (large; the optimised versions live in public/assets)
+Loading state images/
+Album covers/
+
+# the design doc is committed once, as docs/DESIGN.md
+Nomadinho — Design Documentation.md

@@ -1,0 +1,36 @@
+.footer { position: relative; min-height: max(100vh, 640px); min-height: max(100svh, 640px); overflow: hidden; border-top: 1px solid var(--line); background: var(--bg); display: flex; flex-direction: column; }
+
+/* Marquee: 26s loop, translateX 0 → -50% over two identical groups. */
+.marquee { position: absolute; left: 0; right: 0; top: 25.4%; overflow: hidden; }
+.marquee__track { display: flex; width: max-content; animation: marquee 26s linear infinite; will-change: transform; }
+.marquee__group { display: flex; align-items: center; gap: 86px; padding-right: 86px; flex: none; }
+.wordmark--footer { font-size: clamp(80px, 16.45vw, 280px); flex: none; }
+.burst { flex: none; width: clamp(40px, 6.25vw, 105px); height: auto; color: var(--accent); }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+.footer__links {
+  position: absolute; left: var(--gutter); right: var(--gutter); top: 62.1%;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; padding-top: 18px; border-top: 1px solid var(--line);
+}
+.footer__col { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; min-width: 0; }
+.footer__col .ui-label { color: var(--ink-3); }
+.footer__link { position: relative; font-size: 15px; color: var(--ink); text-decoration: none; overflow-wrap: anywhere; }
+.footer__link::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 1px; background: currentColor;
+  transform: scaleX(0); transform-origin: left; transition: transform 0.6s var(--ease-ui);
+}
+.footer__link:hover::after, .footer__link:focus-visible::after { transform: scaleX(1); }
+
+.footer__base { position: absolute; left: var(--gutter); right: var(--gutter); bottom: 49px; display: flex; justify-content: space-between; gap: 16px; color: var(--ink-3); }
+.footer__base a { position: relative; color: inherit; text-decoration: none; transition: color 0.3s var(--ease-ui); }
+.footer__base a:hover { color: var(--ink); }
+
+@media (max-width: 980px) {
+  .footer { min-height: 100svh; }
+  .marquee { top: 20%; }
+  .footer__links { top: auto; bottom: 120px; grid-template-columns: 1fr 1fr; row-gap: 28px; }
+  .footer__base { flex-wrap: wrap; bottom: 28px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track { animation: none; }
+}
